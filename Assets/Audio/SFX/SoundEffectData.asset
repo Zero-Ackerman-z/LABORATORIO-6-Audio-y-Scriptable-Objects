@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b2982bffb460b4e84d1df36b927120, type: 3}
+  m_Name: SoundEffectData
+  m_EditorClassIdentifier: 
+  soundEffectEntries:
+  - effectName: Abriendo
+    effectClip: {fileID: 8300000, guid: bf2075409acc4d2438d731a8b9584c73, type: 3}
+  - effectName: Caminar
+    effectClip: {fileID: 8300000, guid: b47843b0527a81547be3a6bade15aece, type: 3}
+  - effectName: Cerrando
+    effectClip: {fileID: 8300000, guid: 8fcea204a95b27947aed90a2c79e970b, type: 3}
