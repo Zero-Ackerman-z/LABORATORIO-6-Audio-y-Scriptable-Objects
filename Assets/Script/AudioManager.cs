@@ -107,6 +107,25 @@ public class AudioManager : MonoBehaviour
         // Devuelve el título de la música de fondo actual
         return soundEffectAudioSource.clip != null ? soundEffectAudioSource.clip.name : "";
     }
+    public void ResumePreviousSoundEffect()
+    {
+        // Llama al AudioManager para reproducir el efecto de sonido anterior
+        PlaySoundEffect(previousSoundEffectName);
+    }
+    public void StopSoundEffect(string effectName)
+    {
+        // Comprueba si el AudioSource de efectos de sonido es nulo
+        if (soundEffectAudioSource == null)
+        {
+            Debug.LogWarning("Sound effect AudioSource is not assigned!");
+            return;
+        }
 
+        // Detiene la reproducción del efecto de sonido si coincide con el nombre proporcionado
+        if (soundEffectAudioSource.isPlaying && soundEffectAudioSource.clip != null && soundEffectAudioSource.clip.name == effectName)
+        {
+            soundEffectAudioSource.Stop();
+        }
+    }
 }
 

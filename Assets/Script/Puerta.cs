@@ -9,15 +9,13 @@ public class Puerta : MonoBehaviour
     public float doorCloseAngle = 0.0f;
     public float smooth = 3.0f;
     private float autoCloseTimer = 2f;
-
     [SerializeField] private string exitSoundEffectName; // Nombre del efecto de sonido al salir
-    [SerializeField] private string SoundEffectName; // Nombre del efecto de sonido al salir
-    private string previousSoundEffectName; // Guarda el título de la música de fondo antes de reproducir la música de la habitación
+
+    [SerializeField] private string EnterSoundEffectName; // Nombre del efecto de sonido al salir
     void Update()
     {
         if (doorOpen)
         {
-            OpenDoor();
             Quaternion targetRotation = Quaternion.Euler(0, doorOpenAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
             autoCloseTimer -= Time.deltaTime;
@@ -38,11 +36,8 @@ public class Puerta : MonoBehaviour
 
     public void OpenDoor()
     {
-        previousSoundEffectName = AudioManager.Instance.GetsoundEffectTitle();
-
         doorOpen = true;
-        AudioManager.Instance.PlaySoundEffect(SoundEffectName);
-        
+        AudioManager.Instance.PlaySoundEffect(EnterSoundEffectName); // Reanudar el efecto de sonido anterior
     }
 
     public void CloseDoor()
@@ -51,6 +46,6 @@ public class Puerta : MonoBehaviour
         autoCloseTimer = 2f; // Establecer el temporizador en 2 segundos
         AudioManager.Instance.PlaySoundEffect(exitSoundEffectName);
     }
-   
+
 }
 

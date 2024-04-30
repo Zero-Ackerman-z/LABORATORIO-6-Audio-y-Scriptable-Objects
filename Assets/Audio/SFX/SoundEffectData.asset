@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SoundEffectData
   m_EditorClassIdentifier: 
   soundEffectEntries:
-  - effectName: Abriendo
+  - effectName: Abierto
     effectClip: {fileID: 8300000, guid: bf2075409acc4d2438d731a8b9584c73, type: 3}
   - effectName: Caminar
     effectClip: {fileID: 8300000, guid: b47843b0527a81547be3a6bade15aece, type: 3}
