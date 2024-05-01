@@ -8,7 +8,20 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
+    private static VolumeSettings instance;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public void SetMusicVolumen()
     {
         float volumen = musicSlider.value;
@@ -40,11 +53,5 @@ public class VolumeSettings : MonoBehaviour
             SetMusicVolumen();
             SetSFXVolumen();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
