@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject); // Para que el objeto AudioManager no se destruya al cargar una nueva escena
+
         }
         else
         {
@@ -73,6 +75,7 @@ public class AudioManager : MonoBehaviour
         // Devuelve el título de la música de fondo actual
         return backgroundMusicAudioSource.clip != null ? backgroundMusicAudioSource.clip.name : "";
     }
+   
     public void ResumePreviousBackgroundMusic()
     {
         // Llamar al AudioManager para reanudar la música de fondo anterior
@@ -114,18 +117,18 @@ public class AudioManager : MonoBehaviour
     }
     public void StopSoundEffect(string effectName)
     {
-        // Comprueba si el AudioSource de efectos de sonido es nulo
-        if (soundEffectAudioSource == null)
-        {
-            Debug.LogWarning("Sound effect AudioSource is not assigned!");
-            return;
-        }
+// Comprueba si el AudioSource de efectos de sonido es nulo
+    if (soundEffectAudioSource == null)
+    {
+        Debug.LogWarning("Sound effect AudioSource is not assigned!");
+        return;
+    }
 
-        // Detiene la reproducción del efecto de sonido si coincide con el nombre proporcionado
-        if (soundEffectAudioSource.isPlaying && soundEffectAudioSource.clip != null && soundEffectAudioSource.clip.name == effectName)
-        {
-            soundEffectAudioSource.Stop();
-        }
+    // Detiene la reproducción del efecto de sonido si coincide con el nombre proporcionado
+    if (soundEffectAudioSource.isPlaying && soundEffectAudioSource.clip != null && soundEffectAudioSource.clip.name == effectName)
+    {
+        soundEffectAudioSource.Stop();
+    }
     }
 }
 

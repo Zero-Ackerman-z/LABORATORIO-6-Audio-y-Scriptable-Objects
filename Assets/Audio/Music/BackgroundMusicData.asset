@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff82e0f1f40f30b459522683d18556df, type: 3}
+  m_Script: {fileID: 11500000, guid: a674b4e5d4acfd74d965122ccc1fb7ad, type: 3}
   m_Name: BackgroundMusicData
   m_EditorClassIdentifier: 
   musicEntries:
@@ -21,3 +21,5 @@ MonoBehaviour:
     musicClip: {fileID: 8300000, guid: ec43f3bb38c05094e946faf6ebc45b5e, type: 3}
   - musicTitle: cuarto3
     musicClip: {fileID: 8300000, guid: 2c48d98a62b74ad41982453b879eb013, type: 3}
+  - musicTitle: cuarto4
+    musicClip: {fileID: 8300000, guid: 3a28125b7dce163439fd7be3d51c1677, type: 3}

@@ -11,28 +11,27 @@ public class PlayerController : MonoBehaviour
     public float velocidadRotacion = 10f; // Ajusta esta velocidad para controlar la suavidad de la rotación
     private UiManager uiManager;
     public float raycastDistance = 5f; // Distancia del raycast
-    [SerializeField] private Puerta Door;
+    [SerializeField] private Puerta[] doors; // Array de objetos Puerta
     LayerMask mask;
     [SerializeField] private string walkSoundEffectName; // Nombre del efecto de sonido al salir
-    private AudioManager audioManager; // Referencia al AudioManager
-    private bool isWalking; // Indica si el jugador está caminando actualmente
-
+    private AudioManager audioManager; 
     private void Awake()
     {
         controls = new PlayerInputActions();
         controls.Game.Move.performed += ctx => Movimiento(ctx);
         controls.Game.Sound.performed += ctx => Configuracion(ctx);
         controls.Game.Interact.performed += ctx => Interactuar(ctx);
+
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        uiManager = FindObjectOfType<UiManager>(); // Encontrar el UiManager en la escena
+        uiManager = FindObjectOfType<UiManager>(); 
         mask = LayerMask.GetMask("raycas-detect");
-        audioManager = FindObjectOfType<AudioManager>(); // Obtener referencia al AudioManager
-
+        audioManager = FindObjectOfType<AudioManager>(); 
     }
+
 
     private void OnEnable()
     {
@@ -70,7 +69,10 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance))
             {
-                Door.OpenDoor();
+                for (int i = 0; i < doors.Length; i++)
+                {
+                    doors[i].OpenDoor();
+                }
             }
         }
     }
@@ -81,12 +83,12 @@ public class PlayerController : MonoBehaviour
         // Si el jugador está caminando y el AudioManager no es nulo, reproducir el sonido de caminar
         if (movimientoInput != Vector2.zero && audioManager != null)
         {
-            audioManager.PlaySoundEffect("Caminar");
+            audioManager.PlaySoundEffect(walkSoundEffectName);
         }
         // Si el jugador deja de caminar y el AudioManager no es nulo, detener el sonido de caminar
         else if (movimientoInput == Vector2.zero && audioManager != null)
         {
-            audioManager.StopSoundEffect("Caminar");
+            audioManager.StopSoundEffect(walkSoundEffectName);
         }
     }
     

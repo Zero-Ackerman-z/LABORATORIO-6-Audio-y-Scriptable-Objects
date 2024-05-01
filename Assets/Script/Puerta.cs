@@ -9,9 +9,9 @@ public class Puerta : MonoBehaviour
     public float doorCloseAngle = 0.0f;
     public float smooth = 3.0f;
     private float autoCloseTimer = 2f;
-    [SerializeField] private string exitSoundEffectName; // Nombre del efecto de sonido al salir
+    [SerializeField] private string exitSoundEffectName; 
 
-    [SerializeField] private string EnterSoundEffectName; // Nombre del efecto de sonido al salir
+    [SerializeField] private string EnterSoundEffectName; 
     void Update()
     {
         if (doorOpen)
@@ -21,7 +21,6 @@ public class Puerta : MonoBehaviour
             autoCloseTimer -= Time.deltaTime;
             if (autoCloseTimer <= 0)
             {
-                // Cerrar la puerta cuando el temporizador alcance cero
                 CloseDoor();
             }
 
