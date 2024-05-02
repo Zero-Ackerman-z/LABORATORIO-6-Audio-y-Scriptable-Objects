@@ -1,16 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
-    [SerializeField] private string sceneName1; // Nombre de la primera escena
-    [SerializeField] private string sceneName2; // Nombre de la segunda escena
-    public GameObject settingsPanel; // Referencia al panel de configuración en el Canvas
+    [SerializeField] private GameObject settingsPanel; // Referencia al panel de configuración en el Canvas
+    private static UiManager instance;
+    [SerializeField] private Button button;
+    private void Awake()
+    {
+        // Verificar si ya existe una instancia de VolumeSettings
+        if (instance == null)
+        {
+            // Si no hay ninguna instancia, establecer esta como la instancia
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Mantener este objeto entre las escenas
+        }
+        else
+        {
+            // Si ya hay una instancia, destruir este objeto
+            Destroy(gameObject);
+        }
+    }
     public void Start()
     {
         HideSettingsPanel();
+        HideButton();
     }
 
     // Método para mostrar u ocultar el panel de configuración
@@ -30,20 +45,21 @@ public class UiManager : MonoBehaviour
             settingsPanel.SetActive(false);
         }
     }
-    public void ToggleScene()
+    // Método para ocultar el botón
+    public void HideButton()
     {
-        // Obtiene el nombre de la escena actual
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-
-        // Verifica en qué escena se encuentra el jugador y carga la otra escena
-        if (currentSceneName == sceneName1)
+        if (button != null)
         {
-            SceneManager.LoadScene(sceneName2);
+            button.gameObject.SetActive(false);
         }
-        else if (currentSceneName == sceneName2)
+    }
+
+    // Método para mostrar el botón
+    public void MostrarButton()
+    {
+        if (button != null)
         {
-            SceneManager.LoadScene(sceneName1);
+            button.gameObject.SetActive(true);
         }
     }
 }

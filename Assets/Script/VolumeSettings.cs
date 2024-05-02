@@ -12,14 +12,30 @@ public class VolumeSettings : MonoBehaviour
 
     private void Awake()
     {
+        // Verificar si ya existe una instancia de VolumeSettings
         if (instance == null)
         {
+            // Si no hay ninguna instancia, establecer esta como la instancia
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Mantener este objeto entre las escenas
         }
         else
         {
+            // Si ya hay una instancia, destruir este objeto
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("MusicVolumen"))
+        {
+            LoadVolumen();
+        }
+        else
+        {
+            SetMusicVolumen();
+            SetSFXVolumen();
         }
     }
     public void SetMusicVolumen()
@@ -34,24 +50,12 @@ public class VolumeSettings : MonoBehaviour
         myMixer.SetFloat("SFX", Mathf.Log10(volumen) * 20);
         PlayerPrefs.SetFloat("SFXVoumen", volumen);
     }
-    private void LoadVolumen()
+    public void LoadVolumen()
     {
         SFXSlider.value = PlayerPrefs.GetFloat("SFXVolumen");
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolumen");
         SetMusicVolumen();
         SetSFXVolumen();
     }
-    // Start is called before the first frame update
-    private void Start()
-    {
-        if(PlayerPrefs.HasKey("MusicVolumen"))
-        {
-            LoadVolumen();
-        }
-        else
-        {
-            SetMusicVolumen();
-            SetSFXVolumen();
-        }
-    }
+    
 }
