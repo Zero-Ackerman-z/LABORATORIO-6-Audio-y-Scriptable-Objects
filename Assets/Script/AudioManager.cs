@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [SerializeField] private BackgroundMusicData backgroundMusicData;
+    [SerializeField] private List<BackgroundMusicData> backgroundMusicDatas;
     [SerializeField] private AudioSource backgroundMusicAudioSource; // AudioSource para la música de fondo
     [SerializeField] private string previousBackgroundMusicTitle; // Título de la música de fondo anterior
     [SerializeField] private SoundEffectData soundEffectData; // Referencia al scriptable object de datos de efectos de sonido
@@ -37,26 +37,30 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayBackgroundMusic(string musicTitle)
     {
-        if (backgroundMusicData == null)
+        if (backgroundMusicDatas == null || backgroundMusicDatas.Count == 0)
         {
-            Debug.LogError("BackgroundMusicData is not set!");
+            Debug.LogError("BackgroundMusicDatas list is not set or empty!");
             return;
         }
+        previousBackgroundMusicTitle = GetCurrentBackgroundMusicTitle();
 
-        for (int i = 0; i < backgroundMusicData.musicEntries.Length; i++)
+        for (int i = 0; i < backgroundMusicDatas.Count; i++)
         {
-            BackgroundMusicData.BackgroundMusicEntry entry = backgroundMusicData.musicEntries[i];
-            if (entry.musicTitle == musicTitle)
+            BackgroundMusicData bgMusicData = backgroundMusicDatas[i];
+            // Verificar si el objeto bgMusicData es nulo y si tiene una entrada de música válida
+            if (bgMusicData != null && bgMusicData.musicEntry != null && bgMusicData.musicEntry.musicTitle == musicTitle)
             {
-                previousBackgroundMusicTitle = backgroundMusicAudioSource.clip != null ? backgroundMusicAudioSource.clip.name : "";
+                // Asignar el clip de audio al AudioSource
+                backgroundMusicAudioSource.clip = bgMusicData.musicEntry.musicClip;
 
-                backgroundMusicAudioSource.clip = entry.musicClip;
+                // Reproducir en bucle la música de fondo
+                backgroundMusicAudioSource.loop = true;
                 backgroundMusicAudioSource.Play();
                 return;
             }
         }
 
-        Debug.LogWarning("Music with title " + musicTitle + " not found in BackgroundMusicData!");
+        Debug.LogWarning("Music with title " + musicTitle + " not found in any BackgroundMusicData!");
     }
     public void PauseBackgroundMusic()
     {
@@ -68,7 +72,14 @@ public class AudioManager : MonoBehaviour
     }
     public void SetBackgroundMusicData(BackgroundMusicData data)
     {
-        backgroundMusicData = data;
+        // Asegurarse de que backgroundMusicDatas esté inicializado
+        if (backgroundMusicDatas == null)
+        {
+            backgroundMusicDatas = new List<BackgroundMusicData>();
+        }
+
+        // Agregar el objeto data a la lista
+        backgroundMusicDatas.Add(data);
     }
     public string GetCurrentBackgroundMusicTitle()
     {

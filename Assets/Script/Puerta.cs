@@ -9,9 +9,9 @@ public class Puerta : MonoBehaviour
     public float doorCloseAngle = 0.0f;
     public float smooth = 3.0f;
     private float autoCloseTimer = 2f;
-    [SerializeField] private string exitSoundEffectName; 
+    [SerializeField] private string exitSoundEffectName;
 
-    [SerializeField] private string EnterSoundEffectName; 
+    [SerializeField] private string EnterSoundEffectName;
     void Update()
     {
         if (doorOpen)
@@ -30,7 +30,7 @@ public class Puerta : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, doorCloseAngle, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
         }
-        
+
     }
 
     public void OpenDoor()
@@ -47,4 +47,7 @@ public class Puerta : MonoBehaviour
     }
 
 }
+
+
+
 

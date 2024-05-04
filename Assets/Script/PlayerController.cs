@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; } // Miembro estático para acceder a la instancia única de PlayerController
     private PlayerInputActions controls;
     private Rigidbody rb;
     [SerializeField] float velocidadMovimiento = 5f;
@@ -11,10 +12,11 @@ public class PlayerController : MonoBehaviour
     public float velocidadRotacion = 10f; // Ajusta esta velocidad para controlar la suavidad de la rotación
     private UiManager uiManager;
     public float raycastDistance = 5f; // Distancia del raycast
-    [SerializeField] private Puerta[] doors; // Array de objetos Puerta
     LayerMask mask;
     [SerializeField] private string walkSoundEffectName; // Nombre del efecto de sonido al salir
-    private AudioManager audioManager; 
+    private AudioManager audioManager;
+    private NPCInteraction npcInteraction;
+    public Puerta[] doors;
     private void Awake()
     {
         controls = new PlayerInputActions();
@@ -23,26 +25,23 @@ public class PlayerController : MonoBehaviour
         controls.Game.Interact.performed += ctx => Interactuar(ctx);
 
     }
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         uiManager = FindObjectOfType<UiManager>(); 
         mask = LayerMask.GetMask("raycas-detect");
-        audioManager = FindObjectOfType<AudioManager>(); 
+        audioManager = FindObjectOfType<AudioManager>();
+        npcInteraction = FindObjectOfType<NPCInteraction>();
+        doors = FindObjectsOfType<Puerta>();
     }
-
-
     private void OnEnable()
     {
         controls.Game.Enable();
     }
-
     private void OnDisable()
     {
         controls.Game.Disable();
     }
-
     private void FixedUpdate()
     {
         Vector3 movimiento = new Vector3(movimientoInput.y, 0f, movimientoInput.x) * velocidadMovimiento * Time.fixedDeltaTime;
@@ -59,19 +58,31 @@ public class PlayerController : MonoBehaviour
 
         // Dibujar una línea para visualizar el raycast
         Debug.DrawLine(raycastStart, raycastEnd, Color.blue);
-        
-
+      
     }
+    
+    
     public void Interactuar(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance,mask))
             {
-                for (int i = 0; i < doors.Length; i++)
+                if (hit.collider.CompareTag("Door"))
                 {
-                    doors[i].OpenDoor();
+                    for (int i = 0; i < doors.Length; i++)
+                    {
+                        doors[i].OpenDoor();
+                    }
+
+                }
+                else if (hit.collider.CompareTag("NPC"))
+                {              
+                    if (npcInteraction != null)
+                    {
+                        npcInteraction.InteractWithNPC();
+                    }
                 }
             }
         }
@@ -90,8 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             audioManager.StopSoundEffect(walkSoundEffectName);
         }
-    }
-    
+    } 
     public void Configuracion(InputAction.CallbackContext context)
     {
         if (context.started && uiManager != null)

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842c4e7cea1043d4db3e93b6f2a0c43a, type: 3}
+  m_Name: New Dialogue Set
+  m_EditorClassIdentifier: 
+  dialogues:
+  - speakerName: Bienvenida
+    dialogueText: "\"\xA1Hola, aventurero! Bienvenido a  mi habitacion . \xBFEst\xE1s
+      buscando algo en particular?\""
+  - speakerName: Bienbenida2
+    dialogueText: "\"\xA1De vuelta, aventurero! \xBFEncontraste algo emocionante
+      en este cuarto?\""
+  - speakerName: Cuarta Pared
+    dialogueText: "De nuevo aqu\xED! Mmm, no s\xE9 qu\xE9 pensar de ti, aventurero.
+      Me parece que tienes todo el tiempo del mundo para estar aqu\xED en esta habitaci\xF3n
+      en vez del mundo real. Porque ya sabes... \xA1esto es un videojuego! .-."
+  - speakerName: Cuarta Pared2
+    dialogueText: "\xA1Por el momento te ignorare ! Pero recuerda, siempre puedes
+      volver al mundo real cuando quieras. Aunque, \xBFd\xF3nde est\xE1 la diversi\xF3n
+      en eso? XD"

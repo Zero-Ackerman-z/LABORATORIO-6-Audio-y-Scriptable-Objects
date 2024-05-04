@@ -11,6 +11,6 @@ public class BackgroundMusicData : ScriptableObject
         public string musicTitle;
         public AudioClip musicClip;
     }
+    public BackgroundMusicEntry musicEntry;
 
-    public BackgroundMusicEntry[] musicEntries;
 }

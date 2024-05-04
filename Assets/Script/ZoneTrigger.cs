@@ -4,6 +4,7 @@ using UnityEngine;
 public class ZoneTrigger : MonoBehaviour
 {
     [SerializeField] private UiManager uiManager;
+
     private void Start()
     {
         // Obtener la referencia al UIManager
@@ -41,4 +42,5 @@ public class ZoneTrigger : MonoBehaviour
             }
         }
     }
+    
 }

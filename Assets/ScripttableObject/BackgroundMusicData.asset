@@ -12,14 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a674b4e5d4acfd74d965122ccc1fb7ad, type: 3}
   m_Name: BackgroundMusicData
   m_EditorClassIdentifier: 
-  musicEntries:
-  - musicTitle: Fondo
+  musicEntry:
+    musicTitle: Fondo
     musicClip: {fileID: 8300000, guid: 48581f2da8f2b554599ec0f8d6c82afc, type: 3}
-  - musicTitle: cuarto2
-    musicClip: {fileID: 8300000, guid: 4a8d6b578af077e4ea88baad70c133b7, type: 3}
-  - musicTitle: cuarto1
-    musicClip: {fileID: 8300000, guid: ec43f3bb38c05094e946faf6ebc45b5e, type: 3}
-  - musicTitle: cuarto3
-    musicClip: {fileID: 8300000, guid: 2c48d98a62b74ad41982453b879eb013, type: 3}
-  - musicTitle: cuarto4
-    musicClip: {fileID: 8300000, guid: 3a28125b7dce163439fd7be3d51c1677, type: 3}

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842c4e7cea1043d4db3e93b6f2a0c43a, type: 3}
+  m_Name: New Dialogue Set 1
+  m_EditorClassIdentifier: 
+  dialogues:
+  - speakerName: Scriptable Objects
+    dialogueText: "Los Scriptable Objects en Unity son geniales porque se pueden
+      guardar en archivos y configurar f\xE1cilmente. Esto permite crear sistemas
+      de datos flexibles y herramientas de edici\xF3n en tiempo de ejecuci\xF3n."
+  - speakerName: Shader Graph
+    dialogueText: " Shader Graph en Unity es incre\xEDble porque permite crear efectos
+      visuales complejos sin necesidad de programar. Esto facilita a artistas y dise\xF1adores
+      la creaci\xF3n de efectos visuales impresionantes de forma visual y intuitiva."
+  - speakerName: "Mon\xF3logo Interno"
+    dialogueText: " \"Estos cuarto de noche... Luces parpadeantes, sombras danzantes.
+      Busco respuestas, pero solo encuentro m\xE1s preguntas. \xBFQu\xE9 es la verdad
+      en este laberinto de ilusiones?\""
+  - speakerName: Algo Random
+    dialogueText: "\xBFSab\xEDas que los pulpos tienen tres corazones y su sangre
+      es azul? Asombroso, \xBFverdad? a que mola!!!"
